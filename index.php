@@ -25,6 +25,7 @@ function movies (){
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
 $twig = new Twig_Environment($loader, [
     'cache' => false, //__DIR__ . '/tmp'
+    'debug' => true,
 ]);
 
 //Extend twig with a function
@@ -46,9 +47,13 @@ $twig->addExtension(new MonExtension());
 
 $twig->addExtension(new Twig_Extensions_Extension_Text());
 
+$twig->addExtension(new \Twig\Extension\DebugExtension());
+
+$twig->addGlobal('current_page', $page);
+
 switch ($page){
     case 'contact':
-        echo $twig->render('contact.twig');
+        echo $twig->render('contact.twig', ['name' => 'Nicola', 'email' => 'demo@demo.fr']);
         break;
     case 'home':
         echo $twig->render('home.twig', ['movies' => movies()]);
@@ -57,4 +62,6 @@ switch ($page){
         header('HTTP/1.0 404 Not Found');
         echo $twig->render('404.twig');
 }
+
+?>
     

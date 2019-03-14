@@ -1,18 +1,21 @@
 {% extends 'layout.twig' %}
-
+{% import 'form.twig' as form %}
 {% block head %}
-
     <title>Contact me</title>
-
 {% endblock %}
-
 {% block content %}
-    <h1>Contact me</h1>
+    <h1>Contact me </h1>
     <p>
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
         Lorem ipsum dolor sit amet.
     </p>
-
-
+    <form action="?page=contact" method="post">
+        <div class="row">
+            {{ form.input('name','Name', name, {class: 'col-lg col-xs'})}}
+            {{ form.input('email','email', email, {class: 'col-lg col-xs', type: 'email'})}}
+        </div>
+        {{ form.textarea('message','Your message')}}
+        <div class="form-group">
+            <button class="btn btn-primary">Send</button>
+        </div>
+    </form>
 {% endblock %}
