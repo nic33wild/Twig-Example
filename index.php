@@ -10,17 +10,22 @@ if(isset($_GET['page'])) {
     $page = 'home';
 }
 
+//Récupère les films
+function movies (){
+    $pdo = new PDO('mysql:dbname=exampletwig;host=localhost', 'nicola', 'casa');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $movies = $pdo->query('SELECT * FROM Movies ORDER BY id DESC LIMIT 10');
+    return $movies;
+}
+
+
 //Rendu du template
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
 $twig = new Twig_Environment($loader, [
     'cache' => false, //__DIR__ . '/tmp'
 ]);
 
-
-// if ($page === 'contact'){
-//     //require 'home.php';
-//     echo $twig->render('contact.twig');
-// }
 // if ($page === 'home'){
 //     //require 'home.php';
 //     echo $twig->render('home.twig', ['person' => [
@@ -34,7 +39,7 @@ switch ($page){
         echo $twig->render('contact.twig');
         break;
     case 'home':
-        echo $twig->render('home.twig');
+        echo $twig->render('home.twig', ['movies' => movies()]);
         break;
     default:
         header('HTTP/1.0 404 Not Found');
