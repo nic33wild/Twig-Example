@@ -1,6 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php';
+require 'MonExtension.php';
 
 //Routing
 if(isset($_GET['page'])) {
@@ -26,6 +27,13 @@ $twig = new Twig_Environment($loader, [
     'cache' => false, //__DIR__ . '/tmp'
 ]);
 
+//Extend twig with a function
+// $twig->addFilter(new Twig_SimpleFilter('markdown', function($value){
+//     return \Michelf\MarkdownExtra::defaultTransform($value); 
+// }, ['is_safe' => ['html']]));
+
+//Extend twig with a filtre
+
 // if ($page === 'home'){
 //     //require 'home.php';
 //     echo $twig->render('home.twig', ['person' => [
@@ -33,6 +41,10 @@ $twig = new Twig_Environment($loader, [
 //         'age' => 34
 //         ]]);
 // }
+
+$twig->addExtension(new MonExtension());
+
+$twig->addExtension(new Twig_Extensions_Extension_Text());
 
 switch ($page){
     case 'contact':

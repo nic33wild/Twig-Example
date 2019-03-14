@@ -1,13 +1,21 @@
-{% extends 'layout.twig' %}
-{% block head %}
-    <title>Films</title>
-{% endblock %}
-{% block content %}
-    <h1>Films</h1>
-    <ul>
-        {% for film in movies %}
-            <li>
-                {{ film.title }}</li>
-        {% endfor %}
-    </ul>
+{% extends 'layout.twig' %} {% block head %}
+<title>Films</title>
+{% endblock %} {% block content %}
+<h1>Films</h1>
+<div class="row">
+  {% for film in movies %}
+  <div class="col-lg-3 col-xs">
+    <div class="card">
+      <img src={{ film.photo }} alt="" class="card-img-top" width="100%" />
+      <div class="card-block">
+        <h4 class="card-title" style='padding-top: 1rem'>{{ film.title }}</h4>
+        {# <p class="card-text">{{ markdown(film.plot) }}</p> #}
+        <p class="card-text">{{ film.plot | markdown | striptags | truncate(100, true, '...') }}</p>
+        <a href="#">Follow the link</a>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
 {% endblock %}
