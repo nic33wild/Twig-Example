@@ -24,8 +24,8 @@ function movies (){
 //Rendu du template
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
 $twig = new Twig_Environment($loader, [
-    'cache' => false, //__DIR__ . '/tmp'
-    'debug' => true,
+    'cache' => __DIR__ . '/tmp', //false,
+    'debug' => true
 ]);
 
 //Extend twig with a function
