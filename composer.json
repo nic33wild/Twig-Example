@@ -1,0 +1,12 @@
+{
+    "name": "exercise/twig",
+    "authors": [
+        {
+            "name": "nic33wild",
+            "email": "Nicola-Trentini_student2018@wilder.school"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.0"
+    }
+}
